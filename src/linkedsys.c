@@ -11,7 +11,9 @@ Data *new_data(int iMoney, int iItems, int iDebt) {
 }
 
 fError free_data(Data **data) {
-    
+    if (!data || !(*data)) return FNULLARG;
+    free(*data);
+    return FSUCCESS;
 }
 
 
