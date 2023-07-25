@@ -20,5 +20,22 @@ typedef struct Node {
     Node *next;
 } Node;
 
-Data *new_data(int iMoney, int iItems, int iDebt);
+typedef struct LList {
+    Node *current;
+    Node *head;
+    Node *tail;
+} LList;
 
+Data *new_data(int iMoney, int iItems, int iDebt);
+fError free_data(Data **data);
+
+LList *new_llist(Data *data);
+fError free_llist(LList **list);
+Node *insert_at_tail(LList **list, Node *node);
+
+Node *new_node(Data *data);
+fError free_node(Node **node);
+Node *goto_next(LList **list);
+Node *goto_prev(LList **list);
+Node *goto_first(LList **list);
+Node *goto_last(LList **list);
