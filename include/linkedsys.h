@@ -34,7 +34,7 @@ fError free_llist(LList **list);
 Node *insert_at_tail(LList **list, Node *node);
 
 Node *new_node(Data *data);
-fError free_node(Node **node);
+fError free_node(Node **node, bool bFreeData);
 Node *goto_next(LList **list);
 Node *goto_prev(LList **list);
 Node *goto_first(LList **list);
