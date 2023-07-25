@@ -8,7 +8,7 @@ and list include/ as an alternate include directory.
 
 the command may look something like this:
 
-gcc -std=c11 -I include/ src/*.c -o build/main.exe
+`gcc -std=c11 -I include/ src/*.c -o build/main.exe`
 
 ## Libraries in use
 We actually only use stdlib, stdio, and stdbool
