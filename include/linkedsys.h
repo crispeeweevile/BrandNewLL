@@ -35,6 +35,7 @@ Node *insert_at_tail(LList **list, Node *node);
 
 Node *new_node(Data *data);
 fError free_node(Node **node, bool bFreeData);
+Data **get_data(Node *node);
 Node *goto_next(LList **list);
 Node *goto_prev(LList **list);
 Node *goto_first(LList **list);

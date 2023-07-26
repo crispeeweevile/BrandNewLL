@@ -58,6 +58,10 @@ fError free_node(Node **node, bool bFreeData) {
     return FSUCCESS;
 }
 
+Data **get_data(Node *node) {
+    return (&(node->data));
+}
+
 Node *goto_next(LList **list) {
 
 }
