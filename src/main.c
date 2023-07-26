@@ -8,15 +8,27 @@ int main(int argc, char *argv[]) {
     // This is the main file, it might look a little weird
     // but it's used for testing purposes, at least for now.
     Node *nNode;
-    Data *lData;
-    while (true) {
-        nNode = new_node(new_data(5, 6, 2));
-        lData = nNode->data;
-        free_node(&nNode, true);
-        if (nNode == NULL) {
-            printf("Yay! you freed them!\n");
-        }
+    Data **lData;
+    nNode = new_node(new_data(5, 6, 2));
+    lData = get_data(nNode);
+    //lData = nNode->data;
+
+    printf("nNode_dStruct: %p; lData: %p\n", nNode->data, *lData);
+    printf("nmoney: %d; nitems: %d; ndebt: %d\n", nNode->data->money, nNode->data->items, nNode->data->debt);
+    printf("lmoney: %d; litems: %d; ldebt: %d\n", (*lData)->money, (*lData)->items, (*lData)->debt);
+
+    free_node(&nNode, true);
+    //lData = NULL;
+    printf("nNode_dStruct: %p; lData: %p\n", nNode, *lData);
+    if (!(*lData)) {
+        printf("*lData was actually null\n");
+    } else printf("lmoney: %d; litems: %d; ldebt: %d\n", (*lData)->money, (*lData)->items, (*lData)->debt);
+    
+
+    if (nNode == NULL) {
+        printf("Yay! you freed them!\n");
     }
+    
     /*
 datcheck:
     if (nNode->data == NULL) {
