@@ -30,45 +30,27 @@ int main(int argc, char *argv[]) {
     }*/
 
     {
-        LList *tList = new_llist(new_data(5, 77, 0));
-        printf("v1cur: %p; head: %p; tail: %p\n", (*tList->current), (*tList->head), (*tList->tail));
         Node *abc = new_node(new_data(1, 0, 22));
         Node *bc = new_node(new_data(0, 7, 2));
         Node *cd = new_node(new_data(4, 2, 0));
+        LList *tList = new_llist(new_data(5, 77, 0));
         insert_at_tail(&tList, abc);
-        printf("v2cur: %p; head: %p; tail: %p\n", (*tList->current), (*tList->head), (*tList->tail));
         insert_at_tail(&tList, bc);
-        printf("v3cur: %p; head: %p; tail: %p\n", (*tList->current), (*tList->head), (*tList->tail));
         insert_at_tail(&tList, cd);
-        printf("v4cur: %p; head: %p; tail: %p\n", (*tList->current), (*tList->head), (*tList->tail));
-        //exit(1);
-
-        //*
-        //printf("tListPTR: %p\n", tList);
-        //printf("tListCurDP: %p\n", (tList->current));
-        printf("tListCurPTR: %p\n", (*tList->current));
-        printf("tListCurNextPTR: %p\n", (*tList->current)->next);
-        //printf("tLCN, M: %d; I: %d; D: %d\n", (*tList->current)->next->data->money, (*tList->current)->next->data->items, (*tList->current)->next->data->debt);
-        printf("tListCurNextNextPTR: %p\n", (*tList->current)->next->next);
-        //*/
-
-        printf("tListCur: %p; tListCurP: %p; tListCurN: %p\n", (*tList->current), (*tList->current)->prev, (*tList->current)->next);
+        //goto_last(&tList);
         
-        if (!tList) printf("tList");
-        if (!(tList->current)) printf("currentDP");
-        if (!(*tList->current)) printf("currentPTR");
-        if (!((*tList->current)->next)) printf("currentNextPTR");
-
-        while ((*tList->current)->next)
-        {
-            printf("oh shit\n");
-            Node *cur = (*tList->current);
-            printf("Money: %d; Items: %d; Debt: %d\n", cur->data->money, cur->data->items, cur->data->debt);
-            ((tList)->current) = (&(*tList->current)->next);
-            printf("fukr\n");
-            
+        int tlLength = 0;
+        fError aErr = get_length(&tList, &tlLength);
+        if (aErr == FSUCCESS) {
+            for (int i=0; i < tlLength; i++) {
+                printf("xMoney: %d; xItems: %d; xDebt: %d\n", tList->current->data->money, tList->current->data->items, tList->current->data->debt);
+                if (next_exists(&tList)) {
+                    goto_next(&tList);
+                } else {printf("No next!\n"); break;}
+            }
         }
-        
+
+        printf("good\n");
     }
 
     return 0;
