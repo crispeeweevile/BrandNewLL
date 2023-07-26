@@ -37,11 +37,11 @@ Node *insert_at_tail(LList **list, Node *node) {
     if (!list || !(*list)) return NULL;
     if (!node) return NULL;
 
-    printf("iat, tailNext: %p; node: %p\n", (*(**list).tail).next, node);
+    //printf("iat, tailNext: %p; node: %p\n", (*(**list).tail).next, node);
 
     (*(**list).tail).next = node;
     node->prev = ((**list).tail);
-    printf("iat2, tailNext: %p; node: %p\n", (*(**list).tail).next, node);
+    //printf("iat2, tailNext: %p; node: %p\n", (*(**list).tail).next, node);
     ((**list).tail) = node;
 
     return node;
