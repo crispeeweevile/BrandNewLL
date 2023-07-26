@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
             printf("Money: %d; Items: %d; Debt: %d\n", cur->data->money, cur->data->items, cur->data->debt);
             ((tList)->current) = (&(*tList->current)->next);
             printf("fukr\n");
-            exit(1);
+            
         }
         
     }
