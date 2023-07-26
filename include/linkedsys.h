@@ -21,9 +21,9 @@ typedef struct sNode {
 } Node;
 
 typedef struct sLList {
-    Node **current;
-    Node **head;
-    Node **tail;
+    Node *current;
+    Node *head;
+    Node *tail;
 } LList;
 
 Data *new_data(int iMoney, int iItems, int iDebt);
@@ -37,6 +37,9 @@ Node *new_node(Data *data);
 fError free_node(Node **node, bool bFreeData);
 Data **get_data(Node *node);
 Node *goto_next(LList **list);
+Node *next_exists(LList **list);
 Node *goto_prev(LList **list);
+Node *prev_exists(LList **list);
 Node *goto_first(LList **list);
 Node *goto_last(LList **list);
+fError get_length(LList **list, int *len);
