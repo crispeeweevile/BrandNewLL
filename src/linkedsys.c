@@ -34,11 +34,18 @@ fError free_llist(LList **list, bool bFreeData) {
 }
 
 Node *insert_at_tail(LList **list, Node *node) {
+    if (!list || !(*list)) return FNULLARG;
+    if (!node) return FNULLARG;
 
+    (*list)->tail->next = node;
+    node->prev = (*list)->tail;
+
+    return node;
 }
 
 
 Node *new_node(Data *data) {
+    if (!data) return FNULLARG;
     Node *nNode = smalloc(sizeof(Node));
     nNode->data = data;
     nNode->next = NULL;
@@ -51,6 +58,7 @@ fError free_node(Node **node, bool bFreeData) {
     if (!node || !(*node)) return FNULLARG;
     if (bFreeData) {
         if (free_data((&(*node)->data)) != FSUCCESS) {
+            // presumably, if it fails, the data is already free. (so not a big deal?)
             fputs("Failed to free data from node!", stderr);
         }
     }
@@ -65,6 +73,7 @@ fError free_node(Node **node, bool bFreeData) {
 }
 
 Data **get_data(Node *node) {
+    if (!node) return FNULLARG;
     return (&(node->data));
 }
 
