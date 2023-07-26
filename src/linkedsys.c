@@ -20,10 +20,16 @@ fError free_data(Data **data) {
 
 
 LList *new_llist(Data *data) {
+    LList *nLL = smalloc(sizeof(LList));
+    Node *nNode = new_node(data);
+    nLL->current = nNode;
+    nLL->head = nNode;
+    nLL->tail = nNode;
 
+    return nLL;
 }
 
-fError free_llist(LList **list) {
+fError free_llist(LList **list, bool bFreeData) {
 
 }
 

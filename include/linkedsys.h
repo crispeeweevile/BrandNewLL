@@ -30,7 +30,7 @@ Data *new_data(int iMoney, int iItems, int iDebt);
 fError free_data(Data **data);
 
 LList *new_llist(Data *data);
-fError free_llist(LList **list);
+fError free_llist(LList **list, bool bFreeData);
 Node *insert_at_tail(LList **list, Node *node);
 
 Node *new_node(Data *data);
