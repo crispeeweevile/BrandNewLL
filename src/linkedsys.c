@@ -22,9 +22,9 @@ fError free_data(Data **data) {
 LList *new_llist(Data *data) {
     LList *nLL = smalloc(sizeof(LList));
     Node *nNode = new_node(data);
-    nLL->current = nNode;
-    nLL->head = nNode;
-    nLL->tail = nNode;
+    (nLL->current) = &nNode;
+    (nLL->head) = &nNode;
+    (nLL->tail) = &nNode;
 
     return nLL;
 }
@@ -34,18 +34,22 @@ fError free_llist(LList **list, bool bFreeData) {
 }
 
 Node *insert_at_tail(LList **list, Node *node) {
-    if (!list || !(*list)) return FNULLARG;
-    if (!node) return FNULLARG;
+    if (!list || !(*list)) return NULL;
+    if (!node) return NULL;
 
-    (*list)->tail->next = node;
-    node->prev = (*list)->tail;
+    printf("iat, tailNext: %p; node: %p\n", (**(**list).tail).next, node);
+
+    (**(**list).tail).next = node;
+    node->prev = (*(**list).tail);
+    ((**list).tail) = &node;
+    printf("iat2, tailNext: %p; node: %p\n", (**(**list).tail).next, node);
 
     return node;
 }
 
 
 Node *new_node(Data *data) {
-    if (!data) return FNULLARG;
+    if (!data) return METHOD_FAIL;
     Node *nNode = smalloc(sizeof(Node));
     nNode->data = data;
     nNode->next = NULL;
@@ -73,7 +77,7 @@ fError free_node(Node **node, bool bFreeData) {
 }
 
 Data **get_data(Node *node) {
-    if (!node) return FNULLARG;
+    if (!node) return METHOD_FAIL;
     return (&(node->data));
 }
 

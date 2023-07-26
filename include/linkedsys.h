@@ -21,9 +21,9 @@ typedef struct sNode {
 } Node;
 
 typedef struct sLList {
-    Node *current;
-    Node *head;
-    Node *tail;
+    Node **current;
+    Node **head;
+    Node **tail;
 } LList;
 
 Data *new_data(int iMoney, int iItems, int iDebt);
