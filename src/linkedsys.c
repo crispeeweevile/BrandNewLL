@@ -30,7 +30,40 @@ LList *new_llist(Data *data) {
 }
 
 fError free_llist(LList **list, bool bFreeData) {
-    return FFAILURE;
+    if (!list || !(*list)) return FNULLARG;
+    Node *fNode = goto_first(list);
+    if (!fNode) {printf("Failed to goto_first while freeing list!\n"); return FFAILURE;}
+    // goto_next so previous is not NULL
+    if (!goto_next(list)) {printf("Failed to goto_next while freeing list!\n"); return FFAILURE;}
+
+    while (prev_exists(list)) {
+        Node *prevN = ((*list)->current)->prev;
+        if (!prevN) printf("ex45\n");
+        free_node(&prevN, true);
+        goto_next(list);
+    }
+    
+
+    if ((*list)->current) {
+        if (free_node((&(*list)->current), bFreeData) != FSUCCESS) {printf("Failed to free last node\n"); return FFAILURE;};
+        (*list)->current = NULL;
+        (*list)->head = NULL;
+        (*list)->tail = NULL;
+    }
+    if ((*list)->head) {
+        if (free_node((&(*list)->current), bFreeData) != FSUCCESS) {printf("Failed to free last node\n"); return FFAILURE;};
+        (*list)->current = NULL;
+        (*list)->head = NULL;
+        (*list)->tail = NULL;
+    }
+
+    if ((!(*list)->current) && (!(*list)->head) && (!(*list)->tail)) {
+        free((*list));
+        (*list) = NULL;
+        list = NULL;
+    }    
+
+    return FSUCCESS;
 }
 
 Node *insert_at_tail(LList **list, Node *node) {
@@ -60,19 +93,23 @@ Node *new_node(Data *data) {
 
 fError free_node(Node **node, bool bFreeData) {
     if (!node || !(*node)) return FNULLARG;
+    printf("nonnullnode\n");
     if (bFreeData) {
-        if (free_data((&(*node)->data)) != FSUCCESS) {
+        if (free_data((&((*node)->data))) != FSUCCESS) {
             // presumably, if it fails, the data is already free. (so not a big deal?)
-            fputs("Failed to free data from node!", stderr);
+            fputs("Failed to free data from node!\n", stderr);
         }
     }
-
+    printf("datashuldbfreed\n");
     (*node)->next = NULL;
     (*node)->prev = NULL;
     (*node)->data = NULL;
+    printf("nulldpointies\n");
     free((*node));
+    printf("free\n");
     (*node) = NULL;
     node = NULL;
+    printf("nulldnod\n");
     return FSUCCESS;
 }
 

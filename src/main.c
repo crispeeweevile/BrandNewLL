@@ -50,6 +50,14 @@ int main(int argc, char *argv[]) {
             }
         }
 
+        goto_first(&tList);
+        free_llist(&tList, true);
+
+        printf("dad says it might be going bye bye here\n");
+        printf("Cur: %p; Hed: %p; Tal: %p\n", tList->current, tList->head, tList->tail);
+        printf("DataP: %p; NP: %p; PP: %p\n", tList->tail->data, tList->tail->next, tList->tail->prev);
+        printf("dM: %d; dI: %d; dD: %d\n", tList->tail->data->money, tList->tail->data->items, tList->tail->data->debt);
+
         printf("good\n");
     }
 
